@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modding Celestiny</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #111, #222);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .centered {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .centered h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .centered p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .centered .btn {
+      padding: 12px 30px;
+      background-color: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.2s;
+    }
+
+    .centered .btn:hover {
+      background-color: #a78bfa;
+    }
+
+    #mainContent {
+      display: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -260px;
+      top: 0;
+      width: 260px;
+      height: 100vh;
+      background-color: #111;
+      transition: left 0.3s;
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      margin-bottom: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .sidebar-footer {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: gray;
+      font-size: 0.9rem;
+    }
+
+    .open-sidebar {
+      left: 0;
+    }
+
+    .hamburger {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      z-index: 11;
+    }
+
+    .mod-section {
+      padding: 100px 20px;
+      text-align: center;
+      min-height: 100vh; /* Make each mod page fill the entire screen */
+    }
+
+    .mod-section button {
+      background: yellow;
+      color: black;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .mod-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .mod-description {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      color: #ddd;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- START PAGE -->
+  <div id="startPage" class="centered">
+    <h1>✨･ﾟ: * ✧･ﾟ: * Modding Celestiny * :･ﾟ✧ *:･ﾟ✨</h1>
+    <p>Welcome to the official modding site for Celestiny.</p>
+    <p>Access DLLs, modded APKs, backend info, PlayFab/Photon, and more.</p>
+    <p style="color: gray; margin-top: 10px;">- website by x12</p>
+    <p style="margin-top: 20px; font-weight: bold;">Join our Discord: <a href="#" style="color: white;">[https://discord.gg/57TrGnG28s]</a></p>
+    <button class="btn" onclick="showMain()">Continue</button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+  <div id="sidebar" class="sidebar">
+    <a href="#mod1" onclick="showMod('mod1')">Harmony Watch</a>
+    <a href="#mod2" onclick="showMod('mod2')">Mod Page 2</a>
+    <a href="#mod3" onclick="showMod('mod3')">Mod Page 3</a>
+    <a href="#mod4" onclick="showMod('mod4')">Mod Page 4</a>
+    <a href="#mod5" onclick="showMod('mod5')">Mod Page 5</a>
+    <a href="#mod6" onclick="showMod('mod6')">Mod Page 6</a>
+    <a href="#mod7" onclick="showMod('mod7')">Mod Page 7</a>
+    <a href="#mod8" onclick="showMod('mod8')">Mod Page 8</a>
+    <div class="sidebar-footer">- all mods by x12</div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="mainContent">
+    <div id="mod1" class="mod-section" style="background: linear-gradient(to bottom, #000000, #d1c000);">
+      <h2 class="mod-title">Harmony Watch</h2>
+      <p class="mod-description">Harmony Watch is a powerful modding tool for Celestiny, created by Harmony, that allows you to access a wide range of modding features and integrations. Perfect for those looking to enhance their gameplay experience.</p>
+      <p>Thank you for using Harmony Watch Menu. This tool provides a variety of useful functions and features, including access to exclusive mods and the ability to customize your gaming experience.</p>
+      <button>Discord</button>
+      <p>Can't join Discord? Click below to download manually:</p>
+      <button>Download</button>
+      <p style="margin-top: 20px;">AMOUNT OF MODS: 78 VERSION: V1.3</p>
+    </div>
+    
+    <!-- Repeat for mod2 to mod8 with different background gradients and descriptions -->
+    <div id="mod2" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #ee7752);">
+      <h2 class="mod-title">Mod Page 2</h2>
+      <p class="mod-description">Mod Page 2 offers unique enhancements to Celestiny, including new gameplay mechanics and custom items that will completely change the way you play.</p>
+      <button>Download</button>
+    </div>
+    <div id="mod3" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #23a6d5);">
+      <h2 class="mod-title">Mod Page 3</h2>
+      <p class="mod-description">Mod Page 3 adds new features to the game that improve combat mechanics and visual effects, creating an even more immersive experience.</p>
+      <button>Download</button>
+    </div>
+    <div id="mod4" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #23d5ab);">
+      <h2 class="mod-title">Mod Page 4</h2>
+      <p class="mod-description">Mod Page 4 brings new content to Celestiny, including additional levels and challenges designed to keep you engaged for hours.</p>
+      <button>Download</button>
+    </div>
+    <div id="mod5" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #ff6ec4);">
+      <h2 class="mod-title">Mod Page 5</h2>
+      <p class="mod-description">Mod Page 5 introduces exciting gameplay mechanics that allow you to manipulate the game world in new ways, offering a fresh take on familiar features.</p>
+      <button>Download</button>
+    </div>
+    <div id="mod6" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #00c3ff);">
+      <h2 class="mod-title">Mod Page 6</h2>
+      <p class="mod-description">Mod Page 6 enhances the Celestiny universe with custom environments and storylines that will expand your adventure.</p>
+      <button>Download</button>
+    </div>
+    <div id="mod7" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #bc4e9c);">
+      <h2 class="mod-title">Mod Page 7</h2>
+      <p class="mod-description">Mod Page 7 provides additional customization options for your character, making your gameplay experience more personalized than ever.</p>
+      <button>Download</button>
+    </div>
+    <div id="mod8" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #f80759);">
+      <h2 class="mod-title">Mod Page 8</h2>
+      <p class="mod-description">Mod Page 8 introduces a new set of exclusive skins and items that will add even more flair to your gaming sessions.</p>
+      <button>Download</button>
+    </div>
+  </div>
+
+  <script>
+    function showMain() {
+      document.getElementById("startPage").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("open-sidebar");
+    }
+
+    function showMod(id) {
+      const sections = document.querySelectorAll(".mod-section");
+      sections.forEach(sec => sec.classList.add("hidden"));
+      document.getElementById(id).classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
