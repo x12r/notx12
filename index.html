@@ -1,241 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modding Celestiny</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meta Profile</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    @keyframes spin3d {
+      0% {
+        transform: rotateY(0deg);
+      }
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes rainbowText {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     body {
-      background: linear-gradient(to bottom, #111, #222);
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .centered {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      height: 100vh;
-      padding: 20px;
+      min-height: 100vh;
+      padding: 40px 20px;
+      user-select: none;
     }
 
-    .centered h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .centered p {
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-
-    .centered .btn {
-      padding: 12px 30px;
-      background-color: #7c3aed;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: 0.2s;
-    }
-
-    .centered .btn:hover {
-      background-color: #a78bfa;
-    }
-
-    #mainContent {
-      display: none;
-    }
-
-    .sidebar {
-      position: fixed;
-      left: -260px;
-      top: 0;
-      width: 260px;
-      height: 100vh;
-      background-color: #111;
-      transition: left 0.3s;
-      padding: 20px;
-      z-index: 10;
-    }
-
-    .sidebar a {
-      display: block;
-      color: white;
-      margin-bottom: 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .sidebar-footer {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      color: gray;
-      font-size: 0.9rem;
-    }
-
-    .open-sidebar {
-      left: 0;
-    }
-
-    .hamburger {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
-      z-index: 11;
-    }
-
-    .mod-section {
-      padding: 100px 20px;
-      text-align: center;
-      min-height: 100vh; /* Make each mod page fill the entire screen */
-    }
-
-    .mod-section button {
-      background: yellow;
-      color: black;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 20px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .mod-title {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .mod-description {
-      font-size: 1.2rem;
-      margin-top: 20px;
+    .profile-pic-container {
+      width: 180px;
+      height: 180px;
+      perspective: 800px;
       margin-bottom: 30px;
-      color: #ddd;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 10px #fff);
+      animation: spin3d 12s linear infinite;
+      box-shadow: 0 0 20px 8px rgba(255 255 255 / 0.7);
     }
 
-    .hidden {
-      display: none;
+    .profile-pic {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .name {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(270deg, 
+        #ff0000, #ffa500, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+      background-size: 1400% 1400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowText 10s ease infinite;
+      user-select: text;
+      margin: 0;
+      letter-spacing: 3px;
+      text-align: center;
+    }
+
+    .description {
+      margin-top: 10px;
+      font-size: 1.25rem;
+      max-width: 600px;
+      text-align: center;
+      color: #bbb;
+      opacity: 0.8;
+      user-select: text;
+      padding: 0 10px;
+    }
+
+    .links {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .tiktok-btn {
+      background: #000;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+    .tiktok-btn:hover {
+      background: #fff;
+      border-color: #000;
+    }
+    .tiktok-btn img {
+      width: 32px;
+      height: 32px;
+      filter: invert(1);
+      transition: filter 0.3s ease;
+      user-select: none;
+      pointer-events: none;
+    }
+    .tiktok-btn:hover img {
+      filter: invert(0);
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #888;
+      opacity: 0.6;
+      user-select: none;
+      text-align: center;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <!-- START PAGE -->
-  <div id="startPage" class="centered">
-    <h1>✨･ﾟ: * ✧･ﾟ: * Modding Celestiny * :･ﾟ✧ *:･ﾟ✨</h1>
-    <p>Welcome to the official modding site for Celestiny.</p>
-    <p>Access all dlls and apks and meta data by x12.</p>
-    <p style="color: gray; margin-top: 10px;">- website by x12</p>
-    <p style="margin-top: 20px; font-weight: bold;">Join our Discord: <a href="#" style="color: white;">[https://discord.gg/57TrGnG28s]</a></p>
-    <button class="btn" onclick="showMain()">Continue</button>
+
+  <div class="profile-pic-container" aria-label="Profile picture">
+    <img
+      src="https://files.catbox.moe/cdg5qd.jpeg"
+      alt="Profile Picture"
+      class="profile-pic"
+      draggable="false"
+    />
   </div>
 
-  <!-- SIDEBAR -->
-  <button class="hamburger" onclick="toggleSidebar()">☰</button>
-  <div id="sidebar" class="sidebar">
-    <a href="#mod1" onclick="showMod('mod1')">X Client</a>
-    <a href="#mod2" onclick="showMod('mod2')">Mod Page 2</a>
-    <a href="#mod3" onclick="showMod('mod3')">Mod Page 3</a>
-    <a href="#mod4" onclick="showMod('mod4')">Mod Page 4</a>
-    <a href="#mod5" onclick="showMod('mod5')">Mod Page 5</a>
-    <a href="#mod6" onclick="showMod('mod6')">Mod Page 6</a>
-    <a href="#mod7" onclick="showMod('mod7')">Mod Page 7</a>
-    <a href="#mod8" onclick="showMod('mod8')">Mod Page 8</a>
-    <a href="#mod2" onclick="showMod('mod2')">Mod Page 9</a>
-    <a href="#mod3" onclick="showMod('mod3')">Mod Page 10</a>
-    <a href="#mod4" onclick="showMod('mod4')">Mod Page 11</a>
-    <a href="#mod5" onclick="showMod('mod5')">Mod Page 12</a>
-    <a href="#mod6" onclick="showMod('mod6')">Mod Page 13</a>
-    <a href="#mod7" onclick="showMod('mod7')">Mod Page 14</a>
-    <a href="#mod8" onclick="showMod('mod8')">Mod Page 15</a>
-    <div class="sidebar-footer">- all mods by x12</div>
+  <h1 class="name">meta.lol</h1>
+
+  <p class="description">um im a gay femboy and i mod unity games and um make modded apks.</p>
+
+  <div class="links">
+    <a
+      href="https://www.tiktok.com/@chatgptfasta"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="tiktok-btn"
+      aria-label="TikTok profile"
+    >
+      <img
+        src="https://files.catbox.moe/06sn7w.png"
+        alt="TikTok Logo"
+        draggable="false"
+      />
+    </a>
   </div>
 
-  <div id="mainContent">
-  <div id="mod1" class="mod-section" style="background: linear-gradient(to bottom, #000000, #d1c000);">
-    <h2 class="mod-title">X Client</h2>
-    <p class="mod-description">X Client is a simple mod menu for gtag copys made by x12 
-      with overpowered mods and fun mods to troll all people have fun do your best love life and enjoy! .</p>
-    <button onclick="window.location.href='https://discord.gg/AZsywTbYWV'">Discord</button>
-    <p> Click below to download manually:</p>
-    <button onclick="window.location.href='https://github.com/x12/modding-celestiny/raw/main/mods/harmony_watch.zip'">Download</button>
-    <p style="margin-top: 20px;">AMOUNT OF MODS: ??? VERSION: V999</p>
-  </div>
-</div>
+  <footer>by Meta</footer>
 
-    
-    <!-- Repeat for mod2 to mod8 with different background gradients and descriptions -->
-    <div id="mod2" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #ee7752);">
-      <h2 class="mod-title">Mod Page 2</h2>
-      <p class="mod-description">Mod Page 2 offers unique enhancements to Celestiny, including new gameplay mechanics and custom items that will completely change the way you play.</p>
-      <button>Download</button>
-    </div>
-    <div id="mod3" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #23a6d5);">
-      <h2 class="mod-title">Mod Page 3</h2>
-      <p class="mod-description">Mod Page 3 adds new features to the game that improve combat mechanics and visual effects, creating an even more immersive experience.</p>
-      <button>Download</button>
-    </div>
-    <div id="mod4" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #23d5ab);">
-      <h2 class="mod-title">Mod Page 4</h2>
-      <p class="mod-description">Mod Page 4 brings new content to Celestiny, including additional levels and challenges designed to keep you engaged for hours.</p>
-      <button>Download</button>
-    </div>
-    <div id="mod5" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #ff6ec4);">
-      <h2 class="mod-title">Mod Page 5</h2>
-      <p class="mod-description">Mod Page 5 introduces exciting gameplay mechanics that allow you to manipulate the game world in new ways, offering a fresh take on familiar features.</p>
-      <button>Download</button>
-    </div>
-    <div id="mod6" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #00c3ff);">
-      <h2 class="mod-title">Mod Page 6</h2>
-      <p class="mod-description">Mod Page 6 enhances the Celestiny universe with custom environments and storylines that will expand your adventure.</p>
-      <button>Download</button>
-    </div>
-    <div id="mod7" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #bc4e9c);">
-      <h2 class="mod-title">Mod Page 7</h2>
-      <p class="mod-description">Mod Page 7 provides additional customization options for your character, making your gameplay experience more personalized than ever.</p>
-      <button>Download</button>
-    </div>
-    <div id="mod8" class="mod-section hidden" style="background: linear-gradient(to bottom, #000000, #f80759);">
-      <h2 class="mod-title">Mod Page 8</h2>
-      <p class="mod-description">Mod Page 8 introduces a new set of exclusive skins and items that will add even more flair to your gaming sessions.</p>
-      <button>Download</button>
-    </div>
-  </div>
-
-  <script>
-    function showMain() {
-      document.getElementById("startPage").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-    }
-
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("open-sidebar");
-    }
-
-    function showMod(id) {
-      const sections = document.querySelectorAll(".mod-section");
-      sections.forEach(sec => sec.classList.add("hidden"));
-      document.getElementById(id).classList.remove("hidden");
-    }
-  </script>
 </body>
 </html>
