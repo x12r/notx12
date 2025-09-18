@@ -1,8 +1,8 @@
 const consoleDiv = document.getElementById("console");
 const input = document.getElementById("commandInput");
 
-// Change this URL later to your Render server
-const API_URL = "https://your-server.onrender.com/command";
+// Replace this with your Render server URL after deployment
+const API_URL = "https://your-render-server.onrender.com/command";
 
 function logMessage(message) {
   const line = document.createElement("div");
