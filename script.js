@@ -1,38 +1,57 @@
-const consoleDiv = document.getElementById("console");
-const input = document.getElementById("commandInput");
+const commandInput = document.getElementById("commandBar");
+const outputArea = document.getElementById("outputArea");
 
-// Replace this with your Render server URL after deployment
-const API_URL = "https://your-render-server.onrender.com/command";
+// List of available mods for !Help
+const availableMods = [
+    "questpull",
+    "pullmod",
+    "tagaura",
+    "anticrash"
+];
 
-function logMessage(message) {
-  const line = document.createElement("div");
-  line.textContent = message;
-  consoleDiv.appendChild(line);
-  consoleDiv.scrollTop = consoleDiv.scrollHeight;
+// Helper function to append messages to the output area
+function appendMessage(msg) {
+    const p = document.createElement("p");
+    p.textContent = msg;
+    outputArea.appendChild(p);
+    outputArea.scrollTop = outputArea.scrollHeight;
 }
 
-input.addEventListener("keydown", async (event) => {
-  if (event.key === "Enter") {
-    const command = input.value.trim();
-    if (!command) return;
-
-    logMessage("> " + command);
-    input.value = "";
-
-    if (command === "!help") {
-      logMessage("Available commands: !pullmod, !tagaura, !questpull");
-    } else {
-      try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ command })
+// Send command to backend
+async function sendCommand(command) {
+    try {
+        const res = await fetch("/command", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ command })
         });
-        const result = await response.json();
-        logMessage("Server: " + result.message);
-      } catch (err) {
-        logMessage("Error: could not reach server.");
-      }
+
+        if (!res.ok) {
+            const text = await res.text();
+            appendMessage(`Error: ${text}`);
+            return;
+        }
+
+        const data = await res.json();
+        appendMessage(`Mod "${data.mod}" is now ${data.state ? "enabled" : "disabled"}`);
+    } catch (err) {
+        appendMessage(`Error: ${err.message}`);
     }
-  }
+}
+
+// Handle Enter key
+commandInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        const command = commandInput.value.trim();
+        if (!command) return;
+
+        if (command.toLowerCase() === "!help") {
+            appendMessage("Available mods:");
+            availableMods.forEach(mod => appendMessage(`!${mod}`));
+        } else {
+            sendCommand(command);
+        }
+
+        commandInput.value = "";
+    }
 });
