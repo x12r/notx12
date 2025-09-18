@@ -1,51 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Control</title>
-  <style>
-    body {
-      background-color: black;
-      color: limegreen;
-      font-family: "Courier New", monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 2em;
-      color: white;
-      font-family: "Press Start 2P", monospace;
-      margin-bottom: 20px;
-    }
-    #console {
-      width: 80%;
-      height: 50vh;
-      background-color: #111;
-      border: 2px solid limegreen;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-    #commandInput {
-      width: 80%;
-      padding: 10px;
-      background-color: #111;
-      border: 2px solid limegreen;
-      color: limegreen;
-      font-family: "Courier New", monospace;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Game Control</title>
+<style>
+  body {
+    background-color: black;
+    color: #fff;
+    font-family: "Press Start 2P", cursive;
+    text-align: center;
+    margin-top: 50px;
+  }
+  input {
+    width: 300px;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 16px;
+    background-color: #111;
+    color: #fff;
+    border: 2px solid #ff00ff;
+  }
+  #outputArea {
+    width: 80%;
+    max-width: 600px;
+    height: 200px;
+    margin: 20px auto;
+    overflow-y: auto;
+    border: 2px solid #ff00ff;
+    padding: 5px;
+    text-align: left;
+  }
+</style>
 </head>
 <body>
-  <h1>Game Control</h1>
-  <div id="console"></div>
-  <input type="text" id="commandInput" placeholder="Enter command (e.g. !help)" autofocus>
-  
-  <script src="script.js"></script>
+<h1>Game Control</h1>
+<input id="commandBar" placeholder="Enter command here..." />
+<div id="outputArea"></div>
+
+<script>
+const commandInput = document.getElementById("commandBar");
+const outputArea = document.getElementById("outputArea");
+
+// Mods list
+const availableMods = ["questpull","pullmod","tagaura","anticrash"];
+
+// Add message to output
+function appendMessage(msg) {
+  const p = document.createElement("p");
+  p.textContent = msg;
+  outputArea.appendChild(p);
+  outputArea.scrollTop = outputArea.scrollHeight;
+}
+
+// Simulate sending command (replace with backend fetch if needed)
+function sendCommand(command) {
+  const modName = command.replace(/^!/,"").toLowerCase();
+  if (!availableMods.includes(modName)) {
+    appendMessage(`Unknown mod: ${modName}`);
+    return;
+  }
+  appendMessage(`Mod "${modName}" toggled (simulation).`);
+}
+
+// Handle Enter key
+commandInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const command = commandInput.value.trim();
+    if (!command) return;
+
+    if (command.toLowerCase() === "!help") {
+      appendMessage("Available mods:");
+      availableMods.forEach(mod => appendMessage("!" + mod));
+    } else {
+      sendCommand(command);
+    }
+
+    commandInput.value = "";
+  }
+});
+</script>
 </body>
 </html>
